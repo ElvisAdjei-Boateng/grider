@@ -5,20 +5,11 @@ const BookingSuccess = () => {
 
   return (
     <section className="min-h-screen flex items-center justify-center bg-green-50">
-
       <div className="bg-white p-10 rounded-3xl shadow-xl text-center max-w-lg">
+        <div className="text-7xl">✅</div>
 
-        <div className="text-7xl">
-          ✅
-        </div>
-
-        <h1 className="text-4xl font-bold mt-6">
-          Booking Submitted
-        </h1>
-
-        <p className="mt-5 text-gray-600">
-          Your booking has been sent successfully.
-        </p>
+        <h1 className="text-4xl font-bold mt-6">Booking Submitted</h1>
+        <p className="mt-5 text-gray-600">Your booking has been sent successfully.</p>
 
         <Link
           to="/waiting"
@@ -27,9 +18,7 @@ const BookingSuccess = () => {
         >
           Continue
         </Link>
-
       </div>
-
     </section>
   );
 };

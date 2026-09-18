@@ -1,7 +1,5 @@
 import jwt from "jsonwebtoken";
 
-///create protected profile route
-
 const authMiddleware = (req, res, next) => {
   try {
     const authHeader = req.headers.authorization;
@@ -22,19 +20,15 @@ const authMiddleware = (req, res, next) => {
 
     const decoded = jwt.verify(
       token,
-      process.env.JWT_SECRET
+      process.env.JWT_SECRET || "grider-dev-secret"
     );
 
     req.user = decoded;
-
     next();
-
   } catch (error) {
-
     return res.status(401).json({
       message: "Invalid or expired token",
     });
-
   }
 };
 

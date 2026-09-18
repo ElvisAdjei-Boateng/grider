@@ -3,29 +3,26 @@ import cors from "cors";
 
 import authRoutes from "./routes/authRoutes.js";
 import riderRoutes from "./routes/riderRoutes.js";
+import bookingRoutes from "./routes/bookingRoutes.js";
 
 const app = express();
 
-
-// CORS
 app.use(
   cors({
     origin: [
       "http://localhost:5173",
       "http://localhost:5174",
-      "https://grider.adjeiboatengelvis423.workers.dev/"
+      "https://grider.adjeiboatengelvis423.workers.dev",
+      "http://127.0.0.1:5173"
     ],
     methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
-    allowedHeaders: ["Content-Type", "Authorization"]
+    allowedHeaders: ["Content-Type", "Authorization"],
+    credentials: true
   })
 );
 
-
-// Body parser
 app.use(express.json());
 
-
-// Request logger
 app.use((req, res, next) => {
   console.log("METHOD:", req.method);
   console.log("URL:", req.url);
@@ -33,18 +30,16 @@ app.use((req, res, next) => {
   next();
 });
 
-
-// Root
 app.get("/", (req, res) => {
-  res.json({
-    message: "Grider API Running"
-  });
+  res.json({ message: "Grider API Running" });
 });
 
+app.get("/health", (req, res) => {
+  res.json({ status: "ok", timestamp: new Date().toISOString() });
+});
 
-// Routes
 app.use("/api/auth", authRoutes);
 app.use("/api/riders", riderRoutes);
-
+app.use("/api/bookings", bookingRoutes);
 
 export default app;
